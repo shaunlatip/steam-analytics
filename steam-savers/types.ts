@@ -4,3 +4,6 @@ export interface Game {
     Cluster: number;
   }
   
+export interface GameResponse extends Game {
+    message?: string;
+}

@@ -205,7 +205,7 @@ function getScatterPlot(numClusters: number, dimensions: number) {
   let path = `pca_plot_${numClusters}_clusters_${dimensions}_dimensions.html`
   
   return(
-    <div style={{width: "100%", padding: "0 1rem"}}>
+    <div style={{width: "100%", padding: "0"}}>
       <iframe className={styles.scatter_plot} src={path}></iframe>
     </div>
   )

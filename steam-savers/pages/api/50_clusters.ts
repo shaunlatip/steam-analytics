@@ -3,8 +3,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
 import fs from 'fs/promises';
-import { Game } from '../../types';
-import Papa from 'papaparse';
+import { Game, GameResponse } from '../../types';
+import Papa, { ParseError } from 'papaparse';
 
 function isValidGame(game: Game): boolean {
   return (
@@ -28,7 +28,7 @@ export default async function handler(
       Papa.parse<Game>(fileContent, {
         header: true,
         complete: (results) => resolve(results),
-        error: (error) => reject(error),
+        error: (error: any) => reject(error),
         dynamicTyping: true,
       });
     });
@@ -46,6 +46,5 @@ export default async function handler(
     res.status(200).json(validGames);
   } catch (error) {
     console.error('Error reading the CSV file:', error);
-    res.status(500).json({ message: 'Error reading the CSV file' });
   }
 }
